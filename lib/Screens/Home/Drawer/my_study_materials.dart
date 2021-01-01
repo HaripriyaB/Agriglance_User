@@ -59,7 +59,7 @@ class _MyStudyMaterialsState extends State<MyStudyMaterials> {
                         return GestureDetector(
                           onTap: () async {
                             await _asyncSimpleDialog(
-                                context, papers['pdfUrl'], papers['fileName']);
+                                context, papers['pdfUrl'], papers['fileName'],papers['title']);
                           },
                           child: StudyMaterialCard(
                             title: papers['title'],
@@ -108,7 +108,7 @@ class _MyStudyMaterialsState extends State<MyStudyMaterials> {
   }
 
   Future<options> _asyncSimpleDialog(
-      BuildContext context, String url, String filename) async {
+      BuildContext context, String url, String filename, String title) async {
     return await showDialog<options>(
         context: context,
         barrierDismissible: true,
@@ -128,9 +128,9 @@ class _MyStudyMaterialsState extends State<MyStudyMaterials> {
               SimpleDialogOption(
                 onPressed: () {
                   if (kIsWeb)
-                    _shareInWeb(filename, url);
+                    _shareInWeb(title, url);
                   else
-                    _shareInApps(filename, url);
+                    _shareInApps(title, url);
                 },
                 child: const Text('Share'),
               ),

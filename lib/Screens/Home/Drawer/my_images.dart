@@ -60,7 +60,7 @@ class _MyImagesState extends State<MyImages> {
                         return GestureDetector(
                           onTap: () async {
                             await _asyncSimpleDialog(context,
-                                images['imageUrl'], images['fileName']);
+                                images['imageUrl'], images['fileName'], images['title']);
                           },
                           child: ImageCard(
                             title: images['title'],
@@ -108,7 +108,7 @@ class _MyImagesState extends State<MyImages> {
   }
 
   Future<options> _asyncSimpleDialog(
-      BuildContext context, String url, String filename) async {
+      BuildContext context, String url, String filename, String title) async {
     return await showDialog<options>(
         context: context,
         barrierDismissible: true,
@@ -128,9 +128,9 @@ class _MyImagesState extends State<MyImages> {
               SimpleDialogOption(
                 onPressed: () {
                   if (!kIsWeb)
-                    _shareInApps(filename, url);
+                    _shareInApps(title, url);
                   else
-                    _shareInWeb(filename, url);
+                    _shareInWeb(title, url);
                 },
                 child: const Text('Share'),
               ),

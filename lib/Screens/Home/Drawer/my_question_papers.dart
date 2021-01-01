@@ -59,7 +59,7 @@ class _MyQuestionPapersState extends State<MyQuestionPapers> {
                         return GestureDetector(
                           onTap: () async {
                             await _asyncSimpleDialog(
-                                context, qpaper['paperUrl'], qpaper['fileName']);
+                                context, qpaper['paperUrl'], qpaper['fileName'],qpaper['subject']);
                           },
                           child: QuestionPaperCard(
                             subject: qpaper['subject'],
@@ -97,7 +97,7 @@ class _MyQuestionPapersState extends State<MyQuestionPapers> {
   }
 
   Future<options> _asyncSimpleDialog(
-      BuildContext context, String url, String filename) async {
+      BuildContext context, String url, String filename, String title) async {
     return await showDialog<options>(
         context: context,
         barrierDismissible: true,
@@ -118,9 +118,9 @@ class _MyQuestionPapersState extends State<MyQuestionPapers> {
               SimpleDialogOption(
                 onPressed: () {
                   if (!kIsWeb)
-                    _shareInApps(filename, url);
+                    _shareInApps(title, url);
                   else
-                    _shareInWeb(filename, url);
+                    _shareInWeb(title, url);
                 },
                 child: const Text('Share'),
               ),

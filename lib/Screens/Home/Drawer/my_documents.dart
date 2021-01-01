@@ -78,7 +78,7 @@ class _MyDocumentsState extends State<MyDocuments> {
                             noOfClicks++;
                             print("No Of Clicks $noOfClicks");
                             await _asyncSimpleDialog(
-                                context, docu['docUrl'], docu['fileName']);
+                                context, docu['docUrl'], docu['fileName'],docu['title']);
                           },
                           child: DocumentCard(
                             type: docu['type'],
@@ -120,7 +120,7 @@ class _MyDocumentsState extends State<MyDocuments> {
       : Fluttertoast.showToast(msg: "Could not launch $url");
 
   Future<options> _asyncSimpleDialog(
-      BuildContext context, String url, String filename) async {
+      BuildContext context, String url, String filename, String title) async {
     return await showDialog<options>(
         context: context,
         barrierDismissible: true,
@@ -141,9 +141,9 @@ class _MyDocumentsState extends State<MyDocuments> {
               SimpleDialogOption(
                 onPressed: () {
                   if (!kIsWeb)
-                    _shareInApps(filename,url);
+                    _shareInApps(title,url);
                   else
-                    _shareInWeb(filename, url);
+                    _shareInWeb(title, url);
                 },
                 child: const Text('Share'),
               ),

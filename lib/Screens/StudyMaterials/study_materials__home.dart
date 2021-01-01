@@ -109,7 +109,7 @@ class _StudyMaterialsHomeState extends State<StudyMaterialsHome> {
                         noOfClicks++;
                         print("No Of Clicks $noOfClicks");
                         await _asyncSimpleDialog(context,
-                            papers['pdfUrl'], papers['fileName']);
+                            papers['pdfUrl'], papers['fileName'],papers['title']);
                       },
                       child: StudyMaterialCard(
                         subject: papers['subject'],
@@ -153,7 +153,7 @@ class _StudyMaterialsHomeState extends State<StudyMaterialsHome> {
           : Fluttertoast.showToast(msg: "Could not launch $url");
 
   Future<options> _asyncSimpleDialog(BuildContext context, String url,
-      String filename) async {
+      String filename, String title) async {
     return await showDialog<options>(
         context: context,
         barrierDismissible: true,
@@ -174,9 +174,9 @@ class _StudyMaterialsHomeState extends State<StudyMaterialsHome> {
               SimpleDialogOption(
                 onPressed: () {
                   if (!kIsWeb)
-                    _shareInApps(filename, url);
+                    _shareInApps(title, url);
                   else
-                    _shareInWeb(filename, url);
+                    _shareInWeb(title, url);
                 },
                 child: const Text('Share'),
               ),
